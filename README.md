@@ -12,9 +12,8 @@ Make sure you have NVM installed.
 Clone this repo and then:
 
 ```
-$ nvm install 6.1.0
 $ cd /path/to/economizely-webapp
-$ nvm use
+$ nvm install
 $ npm install
 $ npm start
 ```
