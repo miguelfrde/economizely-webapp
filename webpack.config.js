@@ -1,74 +1,40 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
-const merge = require('webpack-merge');
 
-const TARGET = process.env.npm_lifecycle_event;
+const PORT = process.env.PORT || 3000;
 
-const PATHS = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build'),
-  test: path.join(__dirname, 'tests'),
-};
-
-process.env.BABEL_ENV = TARGET;
-
-const common = {
-  entry: PATHS.app,
+module.exports = {
+  devtool: 'eval',
+  entry: [
+    `webpack-dev-server/client?http://localhost:${PORT}`,
+    'webpack/hot/only-dev-server',
+    './app/index.jsx',
+  ],
   output: {
-    path: PATHS.build,
-    filename: '[name].js',
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
   plugins: [
     new HtmlwebpackPlugin({
       template: 'node_modules/html-webpack-template/index.ejs',
-      title: 'Economizely',
       appMountId: 'app',
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['eslint'],
-        include: PATHS.app,
-      },
-    ],
-    loaders: [
-      {
-        test: /.jsx?$/,
-        loaders: ['babel'],
-        include: PATHS.app,
-      },
-    ],
+    loaders: [{
+      test: /\.jsx?$/,
+      loaders: ['react-hot', 'babel'],
+      include: path.join(__dirname, 'app'),
+    }],
+  },
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    progress: true,
+    stats: 'errors-only',
+    host: process.env.HOST,
+    port: PORT,
   },
 };
-
-if (TARGET === 'start' || !TARGET) {
-  module.exports = merge(common, {
-    devtool: 'eval-source-map',
-    devServer: {
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true,
-      stats: 'errors-only',
-      host: process.env.HOST,
-      port: process.env.PORT,
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-    ],
-  });
-}
-
-if (TARGET === 'build' || TARGET === 'stats' || TARGET === 'deploy') {
-  module.exports = merge(common, {});
-}
-
-if (TARGET === 'test' || TARGET === 'tdd') {
-  module.exports = merge(common, {});
-}
