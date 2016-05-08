@@ -1,0 +1,8 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "object-curly-spacing": ["error", "never"],
+    "arrow-body-style": [2, "always"],
+    "no-extra-parens": ["error", "functions"],
+  }
+}
