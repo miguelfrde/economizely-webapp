@@ -9,7 +9,7 @@ import {zIndex} from 'material-ui/styles';
 import {grey50} from 'material-ui/styles/colors';
 
 
-const SelectableList = new MakeSelectable(List);
+const SelectableList = MakeSelectable(List);  // eslint-disable-line new-cap
 
 const SideBar = (props) => {
   const containerStyle = {

@@ -32,11 +32,11 @@ export default class App extends React.Component {
     const app = (
       <div>
         <Title render="Economizely" />
+        <TopBar />
         <SideBar
           location={this.props.location}
           onListItemSelect={this.handleSideBarListItemEvent}
         />
-        <TopBar />
         <MainSection>
           {this.props.children}
         </MainSection>

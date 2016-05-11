@@ -4,6 +4,7 @@ import muiThemable from 'material-ui/styles/muiThemeable';
 const MainSection = (props) => {
   const style = {
     marginLeft: props.muiTheme.navDrawer.width,
+    marginTop: props.muiTheme.appBar.height,
     padding: '1rem',
   };
 
