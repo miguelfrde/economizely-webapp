@@ -1,14 +1,18 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {FloatingActionButton} from 'material-ui';
 import {ContentAdd} from 'material-ui/svg-icons';
-import {ActivityTable, AddActivityItemModal} from '../components';
 import muiThemable from 'material-ui/styles/muiThemeable';
 import {zIndex} from 'material-ui/styles';
+import {ActivityTable, AddActivityItemModal} from '../components';
+import {addActivityItem} from '../actions';
 
 
 class Activity extends React.Component {
   static propTypes = {
     muiTheme: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+    items: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   }
 
   state = {
@@ -19,8 +23,8 @@ class Activity extends React.Component {
     this.setState({showAddModal: true});
   }
 
-  addNewActivityItem = (data) => {
-    // TODO: dispatch action
+  addNewActivityItem = (item) => {
+    this.props.dispatch(addActivityItem(item));
     this.closeAddModal();
   }
 
@@ -52,10 +56,18 @@ class Activity extends React.Component {
           onSave={this.addNewActivityItem}
           onClose={this.closeAddModal}
         />
-        <ActivityTable />
+        <ActivityTable data={this.props.items} />
       </div>
     );
   }
 }
 
-export default muiThemable()(Activity);
+const mapStateToProps = (state) => {
+  return {
+    items: state.activity.items,
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(muiThemable()(Activity));

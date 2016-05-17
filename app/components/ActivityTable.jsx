@@ -45,6 +45,19 @@ export default class ActivityTable extends React.Component {
     });
   }
 
+  renderRow(item, key) {
+    const date = item.date.format('MMM Do, YYYY');
+    const amount = (item.amount < 0 ? '-' : '+') + Math.abs(item.amount).toFixed(2);
+
+    return (
+      <TableRow key={key} hoverable>
+        <TableRowColumn>{date}</TableRowColumn>
+        <TableRowColumn>{item.description}</TableRowColumn>
+        <TableRowColumn>{amount}</TableRowColumn>
+      </TableRow>
+    );
+  }
+
   render() {
     let emptyMessage = null;
     let tableHeight = `${this.state.tableHeight}px`;
@@ -79,15 +92,7 @@ export default class ActivityTable extends React.Component {
             displayRowCheckbox={false}
             deselectOnClickaway={false}
           >
-            {this.props.data.map((column, i) => {
-              return (
-                <TableRow key={i} hoverable>
-                  <TableRowColumn>{column.date}</TableRowColumn>
-                  <TableRowColumn>{column.description}</TableRowColumn>
-                  <TableRowColumn>{column.amount}</TableRowColumn>
-                </TableRow>
-              );
-            })}
+            {this.props.data.map(this.renderRow)}
           </TableBody>
         </Table>
         {emptyMessage}
