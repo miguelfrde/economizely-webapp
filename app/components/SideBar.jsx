@@ -2,7 +2,7 @@ import React from 'react';
 import {Drawer} from 'material-ui';
 import {List, ListItem, MakeSelectable} from 'material-ui/List';
 import {
-  ActionLightbulbOutline, ActionHistory, ActionSettings,
+  ActionDashboard, ActionLightbulbOutline, ActionHistory, ActionSettings,
   ActionTrendingUp, AvEqualizer} from 'material-ui/svg-icons';
 import muiThemable from 'material-ui/styles/muiThemeable';
 import {zIndex} from 'material-ui/styles';
@@ -25,6 +25,7 @@ const SideBar = (props) => {
         onChange={props.onListItemSelect}
         style={{paddingTop: 0}}
       >
+        <ListItem leftIcon={<ActionDashboard />} primaryText="Dashboard" value="/dashboard" />
         <ListItem leftIcon={<ActionHistory />} primaryText="Activity" value="/activity" />
         <ListItem leftIcon={<ActionTrendingUp />} primaryText="Stock" value="/stock" />
         <ListItem leftIcon={<AvEqualizer />} primaryText="Visualization" value="/visualization" />
