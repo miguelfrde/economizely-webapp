@@ -1,0 +1,7 @@
+/* To avoid an styling issue in Material UI that conflicts with normalize.css */
+
+span[type=button],
+a[type=button] {
+  appearance: none;
+  -webkit-appearance: none;
+}
