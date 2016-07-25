@@ -2,17 +2,14 @@ import React from 'react';
 import Title from 'react-title-component';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {cyan700, green500} from 'material-ui/styles/colors';
+import {indigo500} from 'material-ui/styles/colors';
 import TopBar from '../components/TopBar.jsx';
 import SideBar from '../components/SideBar.jsx';
 import MainSection from '../components/MainSection.jsx';
 
 const muiTheme = getMuiTheme({
   appBar: {
-    color: cyan700,
-  },
-  palette: {
-    accent1Color: green500,
+    color: indigo500,
   },
 });
 
