@@ -5,6 +5,7 @@ import {
 
 const tableColumns = [
   {name: 'Date', help: 'Date when the item was added'},
+  {name: 'Category', help: 'Category to which the item belongs'},
   {name: 'Description', help: 'Brief description of what the item is about'},
   {name: 'Amount', help: 'Amount spent in the item or earned from the item'},
 ];
@@ -19,7 +20,12 @@ const styles = {
 
 export default class ActivityTable extends React.Component {
   static propTypes = {
-    data: React.PropTypes.arrayOf(React.PropTypes.object),
+    data: React.PropTypes.arrayOf(React.PropTypes.shape({
+      date: React.PropTypes.object,  // TODO(miguelfrde): make date a UTC timestamp
+      category: React.PropTypes.string,
+      description: React.PropTypes.string,
+      amount: React.PropTypes.amount,
+    })),
   };
 
   static defaultProps = {
@@ -52,6 +58,7 @@ export default class ActivityTable extends React.Component {
     return (
       <TableRow key={key} hoverable>
         <TableRowColumn>{date}</TableRowColumn>
+        <TableRowColumn>{item.category}</TableRowColumn>
         <TableRowColumn>{item.description}</TableRowColumn>
         <TableRowColumn>{amount}</TableRowColumn>
       </TableRow>

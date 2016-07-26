@@ -7,7 +7,9 @@ import {omit} from 'lodash';
 
 const styles = {
   radioButton: {
-    marginBottom: '1rem',
+    element: {
+      marginBottom: '1rem',
+    },
   },
   cancelButton: {
     color: red500,
@@ -24,6 +26,10 @@ const formValidations = [
     target: 'description',
     isValid: validNotEmptyString,
     errorMessage: 'Description cannot be empty',
+  }, {
+    target: 'category',
+    isValid: validNotEmptyString,
+    errorMessage: 'Category cannot be empty',
   },
 ];
 
@@ -34,6 +40,7 @@ const initialState = {
   data: {
     amount: 0.0,
     description: '',
+    category: '',
   },
   type: {
     factor: -1.0,
@@ -125,8 +132,16 @@ export default class AddActivityItemModal extends React.Component {
           defaultSelected={this.state.type.value}
           onChange={this.handleTypeOfItemChange}
         >
-          <RadioButton value="expense" label="Expense" style={styles.radioButton} />
-          <RadioButton value="entry" label="Entry" style={styles.radioButton} />
+          <RadioButton
+            value="expense"
+            label="Expense"
+            style={styles.radioButton.element}
+          />
+          <RadioButton
+            value="entry"
+            label="Entry"
+            style={styles.radioButton.element}
+          />
         </RadioButtonGroup>
         <TextField
           name="description"
@@ -136,6 +151,16 @@ export default class AddActivityItemModal extends React.Component {
           floatingLabelText="Short item description"
           onChange={this.validateFormOnChange}
           errorText={this.state.errors.description}
+        />
+        <br />
+        <TextField
+          name="category"
+          value={this.state.data.category}
+          floatingLabelFixed
+          hintText="Category"
+          floatingLabelText="Category to which the item belongs"
+          onChange={this.validateFormOnChange}
+          errorText={this.state.errors.category}
         />
         <br />
         <TextField

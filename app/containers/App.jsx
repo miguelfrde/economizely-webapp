@@ -11,6 +11,9 @@ const muiTheme = getMuiTheme({
   appBar: {
     color: indigo500,
   },
+  radioButton: {
+    checkedColor: indigo500,
+  },
 });
 
 
