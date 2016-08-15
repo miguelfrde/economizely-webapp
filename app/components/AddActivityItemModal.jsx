@@ -168,6 +168,7 @@ export default class AddActivityItemModal extends React.Component {
           value={this.state.data.amount}
           type="number"
           step="0.01"
+          min="0.01"
           floatingLabelFixed
           hintText="0.00"
           floatingLabelText="Amount to save"
