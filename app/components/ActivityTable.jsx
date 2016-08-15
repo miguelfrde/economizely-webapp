@@ -1,4 +1,7 @@
 import React from 'react';
+import {RaisedButton} from 'material-ui';
+import {ActionBackup} from 'material-ui/svg-icons';
+import {red700, green700} from 'material-ui/styles/colors';
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
 } from 'material-ui/Table';
@@ -54,23 +57,39 @@ export default class ActivityTable extends React.Component {
   renderRow(item, key) {
     const date = item.date.format('MMM Do, YYYY');
     const amount = (item.amount < 0 ? '-' : '+') + Math.abs(item.amount).toFixed(2);
+    const negative = {color: red700};
+    const positive = {color: green700};
 
     return (
       <TableRow key={key} hoverable>
         <TableRowColumn>{date}</TableRowColumn>
         <TableRowColumn>{item.category}</TableRowColumn>
         <TableRowColumn>{item.description}</TableRowColumn>
-        <TableRowColumn>{amount}</TableRowColumn>
+        <TableRowColumn style={amount < 0 ? negative : positive}>{amount}</TableRowColumn>
       </TableRow>
     );
   }
 
+  renderEmptyMessage() {
+    if (this.props.data.length) {
+      return null;
+    }
+    return (
+      <div style={styles.emptyMessage}>
+        <p>There are no activity items saved yet.</p>
+        <RaisedButton
+          label="Upload CSV"
+          icon={<ActionBackup />}
+          secondary
+        />
+      </div>
+    );
+  }
+
   render() {
-    let emptyMessage = null;
     let tableHeight = `${this.state.tableHeight}px`;
 
     if (!this.props.data.length) {
-      emptyMessage = <div style={styles.emptyMessage}>There are no activity items saved yet</div>;
       tableHeight = '1rem';
     }
 
@@ -102,7 +121,7 @@ export default class ActivityTable extends React.Component {
             {this.props.data.map(this.renderRow)}
           </TableBody>
         </Table>
-        {emptyMessage}
+        {this.renderEmptyMessage()}
       </div>
     );
   }
