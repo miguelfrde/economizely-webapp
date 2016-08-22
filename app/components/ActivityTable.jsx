@@ -13,6 +13,10 @@ const tableColumns = [
 
 const TABLE_HEIGHT_PERCENTAGE = 0.7;
 
+const style = {
+  amountStyle: (amount) => { return {color: amount < 0 ? red700 : green700}; },
+};
+
 export default class ActivityTable extends React.Component {
   static propTypes = {
     emptyMessageComponent: React.PropTypes.element.isRequired,
@@ -50,15 +54,13 @@ export default class ActivityTable extends React.Component {
   renderRow(item, key) {
     const date = item.date.format('MMM Do, YYYY');
     const amount = (item.amount < 0 ? '-' : '+') + Math.abs(item.amount).toFixed(2);
-    const negative = {color: red700};
-    const positive = {color: green700};
 
     return (
       <TableRow key={key} hoverable>
         <TableRowColumn>{date}</TableRowColumn>
         <TableRowColumn>{item.category}</TableRowColumn>
         <TableRowColumn>{item.description}</TableRowColumn>
-        <TableRowColumn style={amount < 0 ? negative : positive}>{amount}</TableRowColumn>
+        <TableRowColumn style={style.amountStyle(amount)}>{amount}</TableRowColumn>
       </TableRow>
     );
   }
