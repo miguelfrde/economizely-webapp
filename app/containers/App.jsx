@@ -21,18 +21,29 @@ export default class App extends React.Component {
   static propTypes = {
     children: React.PropTypes.node.isRequired,
     location: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object,
   };
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
   };
 
+  static childContextTypes = {
+    auth: React.PropTypes.object,
+  };
+
+  getChildContext() {
+    return {
+      auth: this.props.route.auth,
+    };
+  }
+
   handleSideBarListItemEvent = (event, value) => {
     this.context.router.push(value);
   }
 
-  render() {
-    const app = (
+  renderLoggedInContainer() {
+    return (
       <div>
         <Title render="Economizely" />
         <TopBar />
@@ -45,10 +56,23 @@ export default class App extends React.Component {
         </MainSection>
       </div>
     );
+  }
 
+  renderLoggedOutContainer() {
+    return (
+      <div>
+        <Title render="Economizely" />
+        {this.props.children}
+      </div>
+    );
+  }
+
+  render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        {app}
+        {this.props.route.auth.loggedIn() ?
+          this.renderLoggedInContainer() :
+          this.renderLoggedOutContainer()}
       </MuiThemeProvider>
     );
   }

@@ -1,3 +1,4 @@
+const dotenv = require('dotenv');
 const Clean = require('clean-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -15,6 +16,15 @@ const PATHS = {
   build: path.join(__dirname, 'build'),
   test: path.join(__dirname, 'tests'),
 };
+
+const envVariables = dotenv.config();
+
+const defines = Object.keys(envVariables)
+  .reduce((memo, key) => {
+    const val = JSON.stringify(envVariables[key]);
+    memo[`__${key.toUpperCase()}__`] = val;
+    return memo;
+  }, {});
 
 process.env.BABEL_ENV = TARGET;
 
@@ -38,6 +48,7 @@ const common = {
       title: 'Economizely',
       appMountId: 'app',
     }),
+    new webpack.DefinePlugin(defines),
   ],
   module: {
     preLoaders: [
