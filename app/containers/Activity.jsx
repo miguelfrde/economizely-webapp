@@ -4,7 +4,7 @@ import {FloatingActionButton} from 'material-ui';
 import {ContentAdd} from 'material-ui/svg-icons';
 import muiThemable from 'material-ui/styles/muiThemeable';
 import {zIndex} from 'material-ui/styles';
-import {ActivityTable, AddActivityItemModal} from '../components';
+import {ActivityTable, AddActivityItemModal, EmptyActivityTableMessage} from '../components';
 import {addActivityItem} from '../actions';
 
 
@@ -56,7 +56,10 @@ class Activity extends React.Component {
           onSave={this.addNewActivityItem}
           onClose={this.closeAddModal}
         />
-        <ActivityTable data={this.props.items} />
+        <ActivityTable
+          data={this.props.items}
+          emptyMessageComponent={<EmptyActivityTableMessage />}
+        />
       </div>
     );
   }

@@ -1,6 +1,4 @@
 import React from 'react';
-import {RaisedButton} from 'material-ui';
-import {ActionBackup} from 'material-ui/svg-icons';
 import {red700, green700} from 'material-ui/styles/colors';
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
@@ -15,14 +13,9 @@ const tableColumns = [
 
 const TABLE_HEIGHT_PERCENTAGE = 0.7;
 
-const styles = {
-  emptyMessage: {
-    marginTop: '1rem',
-  },
-};
-
 export default class ActivityTable extends React.Component {
   static propTypes = {
+    emptyMessageComponent: React.PropTypes.element.isRequired,
     data: React.PropTypes.arrayOf(React.PropTypes.shape({
       date: React.PropTypes.object,  // TODO(miguelfrde): make date a UTC timestamp
       category: React.PropTypes.string,
@@ -74,16 +67,7 @@ export default class ActivityTable extends React.Component {
     if (this.props.data.length) {
       return null;
     }
-    return (
-      <div style={styles.emptyMessage}>
-        <p>There are no activity items saved yet.</p>
-        <RaisedButton
-          label="Upload CSV"
-          icon={<ActionBackup />}
-          secondary
-        />
-      </div>
-    );
+    return this.props.emptyMessageComponent;
   }
 
   render() {
