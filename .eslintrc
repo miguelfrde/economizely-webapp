@@ -1,9 +1,12 @@
 {
+  "env": {
+    "browser": true
+  },
   "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
     "object-curly-spacing": ["error", "never"],
     "arrow-body-style": [2, "always"],
     "no-extra-parens": ["error", "functions"],
-  }
+  },
 }

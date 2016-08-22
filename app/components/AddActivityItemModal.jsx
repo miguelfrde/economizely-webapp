@@ -1,8 +1,9 @@
 import React from 'react';
 import {Dialog, FlatButton, RadioButton, RadioButtonGroup, TextField} from 'material-ui';
 import {red500} from 'material-ui/styles/colors';
-import {validNotEmptyString, validNumber} from '../utils';
 import {omit} from 'lodash';
+
+import {validNotEmptyString, validNumber} from '../utils';
 
 
 const styles = {

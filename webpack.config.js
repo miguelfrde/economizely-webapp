@@ -19,8 +19,7 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   devtool: 'eval',
   entry: [
-    `webpack-dev-server/client?http://localhost:${PORT}`,
-    'webpack/hot/only-dev-server',
+    'webpack/hot/dev-server',
     './app/index.jsx',
   ],
   output: {

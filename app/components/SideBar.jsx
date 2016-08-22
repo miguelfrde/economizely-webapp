@@ -21,7 +21,7 @@ const SideBar = (props) => {
   return (
     <Drawer zDepth={1} containerStyle={containerStyle}>
       <SelectableList
-        value={location.pathname}
+        value={props.location.pathname}
         onChange={props.onListItemSelect}
         style={{paddingTop: 0}}
       >
