@@ -1,10 +1,12 @@
 const Clean = require('clean-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const path = require('path');
 const pkg = require('./package.json');
 const webpack = require('webpack');
+
 
 const TARGET = process.env.npm_lifecycle_event;
 const PORT = process.env.PORT || 3000;
@@ -35,6 +37,7 @@ const common = {
       title: 'Economizely',
       appMountId: 'app',
     }),
+    new DashboardPlugin(),
   ],
   module: {
     preLoaders: [
