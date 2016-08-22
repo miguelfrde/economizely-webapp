@@ -21,6 +21,7 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   devtool: 'eval',
   entry: [
+    `webpack-dev-server/client?http://localhost:${PORT}`,
     'webpack/hot/dev-server',
     './app/index.jsx',
   ],
@@ -37,7 +38,6 @@ const common = {
       title: 'Economizely',
       appMountId: 'app',
     }),
-    new DashboardPlugin(),
   ],
   module: {
     preLoaders: [
@@ -74,6 +74,7 @@ if (TARGET === 'start' || !TARGET) {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      new DashboardPlugin(),
     ],
   });
 }
