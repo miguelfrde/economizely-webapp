@@ -4,6 +4,10 @@
 [![Dependency Status](https://david-dm.org/miguelfrde/economizely-webapp.svg)](https://david-dm.org/miguelfrde/economizely-webapp)
 [![devDependency Status](https://david-dm.org/miguelfrde/economizely-webapp/dev-status.svg)](https://david-dm.org/miguelfrde/economizely-webapp#info=devDependencies)
 
+Webapp for money spending tracking and visualization.
+
+:warning: **CURRENT STATUS:** I worked on this long time ago, but I haven't found time to continue. It might be even broken at the current HEAD. Hopefully I'll get back to this some day. 
+
 
 ## Setup
 
